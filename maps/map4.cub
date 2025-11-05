@@ -1,7 +1,7 @@
-NO ./textures/NO_256.xpm
-WE ./textures/WE_256.xpm
-EA ./textures/EA_256.xpm
-SO ./textures/SO_256.xpm
+SO ./imgs/muroeste
+WE ./imgs/muronorte
+EA ./imgs/murooeste
+NO ./imgs/murosur
 
 F 255,0,0
 C 205,30,200

@@ -1,8 +1,9 @@
 F 139,69,19
-SO ./imgs/tech1
-WE ./imgs/tech2
-EA ./imgs/tech3
-NO ./imgs/tech4
+SO ./imgs/muroeste
+WE ./imgs/muronorte
+EA ./imgs/murooeste
+NO ./imgs/murosur
+
 C 135,206,235
 11111111111111
 10000000000001
