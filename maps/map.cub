@@ -2,8 +2,10 @@ F 139,0,19
 SO                ./imgs/murosur
 NO ./imgs/muronorte
 WE ./imgs/murooeste
+
                                 EA     ./imgs/muroeste
-C 135,37,235
+        C    135,37,239
+
 
         1111111111111111111111111
         1000000000110000000000001

@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/05 15:37:17 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/06 12:24:59 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ void init_game(t_game *game);
 //Read file
 void	read_file(t_game *game, const char *filename);
 
-//Check textures
+//Check errors
 int	check_ceiling(t_game *game, char *line);
 int	check_floor(t_game *game, char *line);
 int check_texture(t_game *game, char *line, char c1, char c2);
+void	check_file_extension(char *filename);
+void check_floor_ceiling(t_game *game, char *line);
+
 
 //Frees
 void	free_matrix(char **mtx);

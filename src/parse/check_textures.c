@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:39:10 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/05 14:13:07 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/06 11:14:07 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_texture(t_game *game, char *line, char c1, char c2)
 	fd = open(route, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd("Error: Invalid texture path\n", 2);
+		ft_putstr_fd("Error\nInvalid texture path\n", 2);
 		free(route);
 		exit(0);
 	}

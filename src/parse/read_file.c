@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:57:44 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/05 15:51:47 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/06 12:39:18 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,17 @@ void	check_texture_elements(t_game *game, int *i)
 		game->c_f_color++;
 }
 
+void	err_rep_elements(t_game *game, int *i)
+{
+	if (game->c_tex_so != 1 || game->c_tex_no != 1 || game->c_tex_we != 1
+		|| game->c_tex_ea != 1 || game->c_f_color != 1 || game->c_c_color != 1)
+	{
+		ft_putstr_fd("Error\nExpected: 1 NO texture, 1 SO texture, 1 WE texture, 1 EA texture, 1 F color and 1 C color \n", 2);
+		exit(0);
+	}
+	game->map[*i] = NULL;
+}
+
 void	read_file(t_game *game, const char *filename)
 {
 	int		fd;
@@ -59,7 +70,8 @@ void	read_file(t_game *game, const char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
-		write(2, "Error\n", 6);
+		ft_putstr_fd("Error\nCan't open the map\n", 2);
+		free(game->map);
 		exit(1);
 	}
 	i = 0;
@@ -68,24 +80,11 @@ void	read_file(t_game *game, const char *filename)
 	{
 		game->map[i] = ft_strtrim(line, "\n");
 		free(line);
-		check_floor(game, game->map[i]);
-		//check_ceiling(game, game->map[i]);
+		check_floor_ceiling(game, game->map[i]);
 		check_texture_elements(game, &i);
 		i++;
 		line = get_next_line(fd);
 	}
-	printf("s: %d\n", game->c_tex_so);
-	printf("n: %d\n", game->c_tex_no);
-	printf("w: %d\n", game->c_tex_we);
-	printf("e: %d\n", game->c_tex_ea);
-	printf("ceil: %d\n", game->c_c_color);
-	printf("floor: %d\n", game->c_f_color);
-	if (game->c_tex_so != 1 || game->c_tex_no != 1 || game->c_tex_we != 1
-		|| game->c_tex_ea != 1 || game->c_f_color != 1 || game->c_c_color != 1)
-	{
-		ft_putstr_fd("Error: Repeated elements", 2);
-		exit(0);
-	}
-	game->map[i] = NULL;
+	err_rep_elements(game, &i);
 	close(fd);
 }

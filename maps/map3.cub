@@ -3,7 +3,7 @@ WE ./imgs/muronorte
 EA ./imgs/murooeste
 NO ./imgs/murosur
 
-                F 0,100,1
+                F 0,100,100
       C 105,30,200
 
                 111111111111
