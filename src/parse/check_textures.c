@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:39:10 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/06 11:14:07 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/11 15:53:47 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,20 @@ int	check_texture(t_game *game, char *line, char c1, char c2)
 	if (c1 == 'E' && c2 == 'A')
 		game->routes.ea = route;
 	return (1);
+}
+
+void	check_texture_elements(t_game *game, int *i)
+{
+	if (check_texture(game, game->file[*i], 'S', 'O') == 1)
+		game->c_tex_so++;
+	if (check_texture(game, game->file[*i], 'N', 'O') == 1)
+		game->c_tex_no++;
+	if (check_texture(game, game->file[*i], 'W', 'E') == 1)
+		game->c_tex_we++;
+	if (check_texture(game, game->file[*i], 'E', 'A') == 1)
+		game->c_tex_ea++;
+	if (check_ceiling(game, game->file[*i]) == 1)
+		game->c_c_color++;
+	if (check_floor(game, game->file[*i]) == 1)
+		game->c_f_color++;
 }

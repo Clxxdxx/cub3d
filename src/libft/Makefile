@@ -11,7 +11,7 @@ SRC =	ft_atoi.c ft_isprint.c ft_memmove.c ft_strchr.c ft_strmapi.c ft_toupper.c 
             ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
 		ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c \
             ft_printf/ft_printf.c ft_printf/convert_char_string.c ft_printf/convert_numbers.c ft_printf/convert_pointer.c \
-            get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+            get_next_line/get_next_line.c
 OBJ = $(SRC:.c=.o)
 INCLUDE = libft.h
 

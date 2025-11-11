@@ -12,7 +12,7 @@ endif
 
 # Configuración para Linux (Ubuntu)
 ifeq ($(UNAME_S),Linux)
-	CFLAGS = -Wall -Wextra -Werror -I/usr/include/readline
+	CFLAGS = -Wall -Wextra -Werror  -I/usr/include/readline
 	LIBS = -lreadline
 endif
 
@@ -32,7 +32,7 @@ SUCCESS_MSG = "\n\033[1;32m┌────────────────�
 # Archivos fuente
 SRC = src/cub3d.c src/initializer.c \
 	  src/parse/read_file.c src/parse/check_ceilling_floor.c src/parse/check_textures.c \
-	  src/parse/check_filename.c \
+	  src/parse/check_filename.c src/parse/utils.c src/parse/check_walls.c \
 	  src/frees/free1.c  
 	 
 OBJ_DIR = objects
