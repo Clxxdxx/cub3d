@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:41:48 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/06 12:26:54 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/12 10:50:50 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	check_ceiling(t_game *game, char *line)
 	tmp = get_rgb(line, 'C');
 	if (!tmp)
 		return (0);
-	if (ft_count_char(tmp, ',') > 2)
+	if (ft_count_char(tmp, ',') != 2)
 	{
 		ft_putstr_fd("Error\nInvalid ceiling format\n", 2);
 		exit(1);
@@ -88,7 +88,7 @@ int	check_floor(t_game *game, char *line)
 	tmp = get_rgb(line, 'F');
 	if (!tmp)
 		return (0);
-	if (ft_count_char(tmp, ',') > 2)
+	if (ft_count_char(tmp, ',') != 2)
 	{
 		ft_putstr_fd("Error\nInvalid floor format\n", 2);
 		exit(1);

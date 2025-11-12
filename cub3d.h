@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/11 15:52:38 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:28:54 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				char_map(char *line);
 int				count_lines(const char *filename);
 int				get_max_width(char **map);
 void			validate_player(t_game *game);
+void			validate_closed_map(t_game *game);
 
 
 // Frees

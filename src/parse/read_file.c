@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:57:44 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/11 15:52:22 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/12 10:43:21 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	config_ready(t_game *game)
 	return (0);
 }
 
-void	process_line(t_game *game, t_r_file *r_file)
+void	process_line(t_game *game, t_r_file *r_file, int fd)
 {
 	game->file[r_file->i_file] = r_file->trimmed;
 	if (!r_file->in_map)
@@ -56,6 +56,7 @@ void	process_line(t_game *game, t_r_file *r_file)
 	else
 		err_unrec_char(game, r_file->trimmed, r_file);
 	r_file->i_file++;
+	r_file->line = get_next_line(fd);
 }
 
 void	read_file(t_game *game, const char *filename, t_r_file *r_file)
@@ -78,8 +79,7 @@ void	read_file(t_game *game, const char *filename, t_r_file *r_file)
 	{
 		r_file->trimmed = ft_strtrim(r_file->line, "\n");
 		free(r_file->line);
-		process_line(game, r_file);
-		r_file->line = get_next_line(fd);
+		process_line(game, r_file, fd);
 	}
 	close(fd);
 	game->file[r_file->i_file] = NULL;
