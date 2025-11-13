@@ -6,8 +6,8 @@ UNAME_S := $(shell uname -s)
 
 # Configuración para macOS
 ifeq ($(UNAME_S),Darwin)
-	CFLAGS = -Wall -Wextra -Werror -I/opt/homebrew/Cellar/readline/8.3.1/include -g
-	LIBS = -lreadline -L/opt/homebrew/Cellar/readline/8.3.1/lib
+CFLAGS = -Wall -Wextra -Werror -Imlx -g
+LIBS = -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
 endif
 
 # Configuración para Linux (Ubuntu)
@@ -18,6 +18,8 @@ endif
 
 LIBFT_DIR = src/libft
 LIBFT_LIB = src/libft/libft.a
+MLX_DIR = mlx
+MLX_LIB = mlx/libmlx.a
 
 COMPILE_MSG = "\033[1;32m[✓]\033[0m Compilando: \033[1;36m"
 LINK_MSG = "\033[1;33m[🔗]\033[0m Enlazando ejecutable: \033[1;35m"
@@ -30,7 +32,7 @@ SUCCESS_MSG = "\n\033[1;32m┌────────────────�
 └────────────────────────────────────────┘\033[0m\n"
 
 # Archivos fuente
-SRC = src/cub3d.c src/initializer.c \
+SRC = src/cub3d.c src/initializer.c src/executor/executor.c src/executor/player.c src/executor/player_utils.c \
 	  src/parse/read_file.c src/parse/check_ceilling_floor.c src/parse/check_textures.c \
 	  src/parse/check_filename.c src/parse/utils.c src/parse/set_map_rectangular.c \
 	  src/parse/check_valid_road.c src/parse/trim_map.c \
@@ -42,10 +44,14 @@ OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
 all: header $(NAME)
 
 
-$(NAME): $(LIBFT_LIB) $(OBJS)
+$(NAME): $(MLX_LIB) $(LIBFT_LIB) $(OBJS)
 	@echo $(LINK_MSG)$(NAME)'\033[0m'
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_LIB) $(LIBS) -o $(NAME)
 	@echo $(SUCCESS_MSG)
+
+$(MLX_LIB):
+	@echo "\033[1;94m[🖥️]\033[0m Compilando MLX..."
+	@make -s -C $(MLX_DIR)
 
 $(LIBFT_LIB):
 	@echo "\033[1;94m[📚]\033[0m Compilando libft..."

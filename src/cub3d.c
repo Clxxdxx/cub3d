@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:11 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 12:31:00 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/13 16:35:32 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ int	main(int argc, char **argv)
 	printf("\n--- MAPA ---\n");
 	for (int i = 0; game.map[i]; i++)
 		printf("%s\n", game.map[i]);
+	
+	start_executor(&game);
+	
 	free_matrix(game.file);
 	free_matrix(game.body_map);
 	free(game.routes.so);

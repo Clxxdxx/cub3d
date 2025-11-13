@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 10:53:56 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 11:12:41 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/13 16:05:20 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int	char_map(char *line)
 {
 	int	i;
-	int	count;
+	// int	count;
 
-	count = 0;
+	// count = 0;
 	i = 0;
 	while (line[i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 12:14:55 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/05 14:13:35 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/13 16:44:46 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,25 @@ void	free_matrix(char **mtx)
 		i++;
 	}
 	free(mtx);
+}
+
+void	cleanup_game(t_game *game)
+{
+	if (!game)
+		return ;
+	
+	if (game->file)
+		free_matrix(game->file);
+	if (game->body_map)
+		free_matrix(game->body_map);
+	if (game->map)
+		free_matrix(game->map);
+	if (game->routes.so)
+		free(game->routes.so);
+	if (game->routes.no)
+		free(game->routes.no);
+	if (game->routes.we)
+		free(game->routes.we);
+	if (game->routes.ea)
+		free(game->routes.ea);
 }

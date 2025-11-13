@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 11:43:57 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/13 17:07:19 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,24 @@
 # define CUB3D_H
 # include "fcntl.h"
 # include "src/libft/libft.h"
+# include <mlx.h>
+# include <math.h>
+
+
+# define WINDOW_WIDTH 1024
+# define WINDOW_HEIGHT 768
+
+# define KEY_ESC 53
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+
+# define MOVE_SPEED 0.1
+# define ROT_SPEED 0.1
+# define PI 3.14159265359
 
 
 //PUTISIMA NORMINETTE
@@ -45,6 +63,12 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+
+	//javier
+	double		player_x;
+	double		player_y;
+	double		player_angle;
+	char		player_dir;
 
 	char		**file;
 	char		**body_map;
@@ -87,5 +111,21 @@ void 			map_trimmed(t_game *game);
 // Frees
 void			free_matrix(char **mtx);
 int				config_ready(t_game *game);
+void			cleanup_game(t_game *game);
+
+// Player
+void			init_player(t_game *game);
+void			move_player(t_game *game, int keycode);
+int				is_valid_move(t_game *game, double new_x, double new_y);
+void			rotate_player(t_game *game, int keycode);
+void			move_forward_back(t_game *game, int keycode, double *new_x, double *new_y);
+void			move_strafe(t_game *game, int keycode, double *new_x, double *new_y);
+
+// Executor
+int				start_executor(t_game *game);
+void			init_mlx_window(t_game *game);
+int				close_window(t_game *game);
+int				key_press(int keycode, t_game *game);
+void			draw_player_info(t_game *game);
 
 #endif
