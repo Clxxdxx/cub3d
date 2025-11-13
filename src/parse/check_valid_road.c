@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:05:33 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/12 12:56:23 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/13 12:25:28 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,8 @@ void	validate_closed_map(t_game *game)
 	int		player_x;
 	int		player_y;
 
-	copy = dup_map(game->map);
+	copy = dup_map(game->body_map);
 	find_player(copy, &player_x, &player_y);
-	// printf("Posicion x %d\nPosicion y %d", player_x, player_y);
 	if (flood_fill(copy, player_x, player_y) == 0)
 	{
 		ft_putstr_fd("Error\nMap is not closed\n", 2);

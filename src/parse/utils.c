@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 10:53:56 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/11 15:54:31 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/13 11:12:41 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,13 +108,13 @@ void	validate_player(t_game *game)
 
 	count = 0;
 	i = 0;
-	while (game->map[i])
+	while (game->body_map[i])
 	{
 		j = 0;
-		while (game->map[i][j])
+		while (game->body_map[i][j])
 		{
-			if (game->map[i][j] == 'N' || game->map[i][j] == 'S'
-				|| game->map[i][j] == 'E' || game->map[i][j] == 'W')
+			if (game->body_map[i][j] == 'N' || game->body_map[i][j] == 'S'
+				|| game->body_map[i][j] == 'E' || game->body_map[i][j] == 'W')
 				count++;
 			j++;
 		}

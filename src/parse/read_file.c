@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:57:44 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/12 10:43:21 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/13 15:41:55 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	err_unrec_char(t_game *game, char *trimmed, t_r_file *file)
 		ft_putstr_fd("Error\nUnrecognized character\n", 2);
 		exit(1);
 	}
-	game->map[file->i_map] = ft_strdup(trimmed);
+	game->body_map[file->i_map] = ft_strdup(trimmed);
 	(file->i_map)++;
 }
 
@@ -67,7 +67,7 @@ void	read_file(t_game *game, const char *filename, t_r_file *r_file)
 	r_file->i_map = 0;
 	r_file->in_map = 0;
 	game->file = malloc(sizeof(char *) * (count_lines(filename) + 1));
-	game->map = malloc(sizeof(char *) * (count_lines(filename) + 1));
+	game->body_map = malloc(sizeof(char *) * (count_lines(filename) + 1));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
@@ -83,7 +83,7 @@ void	read_file(t_game *game, const char *filename, t_r_file *r_file)
 	}
 	close(fd);
 	game->file[r_file->i_file] = NULL;
-	game->map[r_file->i_map] = NULL;
+	game->body_map[r_file->i_map] = NULL;
 	err_rep_elements(game, &r_file->i_file);
 	validate_player(game);
 }

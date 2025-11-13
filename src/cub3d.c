@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:11 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/12 14:21:48 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/13 12:31:00 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 	init_game(&game);
 	check_file_extension(argv[1]);
 	read_file(&game, argv[1], &r_file);
+	validate_closed_map(&game);
+	map_trimmed(&game);
 	// 🟦 Mostrar rutas de texturas
 	printf("\n--- TEXTURAS ---\n");
 	printf("NO: %s\n", game.routes.no);
@@ -41,9 +43,8 @@ int	main(int argc, char **argv)
 	printf("\n--- MAPA ---\n");
 	for (int i = 0; game.map[i]; i++)
 		printf("%s\n", game.map[i]);
-	validate_closed_map(&game);
 	free_matrix(game.file);
-	free_matrix(game.map);
+	free_matrix(game.body_map);
 	free(game.routes.so);
 	free(game.routes.no);
 	free(game.routes.we);
