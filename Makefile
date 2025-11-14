@@ -7,7 +7,7 @@ UNAME_S := $(shell uname -s)
 # Configuración para macOS
 ifeq ($(UNAME_S),Darwin)
 CFLAGS = -Wall -Wextra -Werror -Imlx -g
-LIBS = -Lmlx -lmlx -framework OpenGL -framework AppKit -lm
+LIBS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
 
 # Configuración para Linux (Ubuntu)
