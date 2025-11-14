@@ -75,7 +75,22 @@ esto no vale, solo es para poner mensajes en pantalla
 */
 void	draw_player_info(t_game *game)
 {
-	(void)game;
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < 100)
+	{
+		x = 0;
+		while (x < 100)
+		{
+			mlx_put_pixel(game->img, x + 50, y + 50, 0xFF0000FF);
+			x++;
+		}
+		y++;
+	}
+	mlx_put_pixel(game->img, (int)game->player_x * 10 + 50, 
+		(int)game->player_y * 10 + 50, 0x00FF00FF);
 }
 
 /*
