@@ -6,11 +6,11 @@
 /*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 16:30:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/13 16:44:48 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/14 11:48:31 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 #include <math.h>
 
 static void	set_player_position(t_game *game, int x, int y)

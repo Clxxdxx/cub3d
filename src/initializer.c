@@ -6,7 +6,7 @@
 /*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:49:22 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 16:44:43 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/14 11:48:31 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_game(t_game *game)
 {
 	// Inicializar punteros MLX
 	game->mlx = NULL;
-	game->win = NULL;
+	game->img = NULL;
 	
 	// Inicializar datos del jugador
 	game->player_x = 0.0;

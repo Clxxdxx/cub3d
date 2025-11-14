@@ -6,20 +6,20 @@ UNAME_S := $(shell uname -s)
 
 # Configuración para macOS
 ifeq ($(UNAME_S),Darwin)
-CFLAGS = -Wall -Wextra -Werror -Imlx -g
-LIBS = -Lmlx -lmlx -framework OpenGL -framework AppKit
+CFLAGS = -Wall -Wextra -Werror -IMLX42/include -g
+LIBS = -LMLX42/build -lmlx42 -LMLX42/build/_deps/glfw-build/src -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -ldl -pthread -lm
 endif
 
-# Configuración para Linux (Ubuntu)
+# Configuración para Linux
 ifeq ($(UNAME_S),Linux)
-	CFLAGS = -Wall -Wextra -Werror  -I/usr/include/readline
-	LIBS = -lreadline
+CFLAGS = -Wall -Wextra -Werror -IMLX42/include -g
+LIBS = -LMLX42/build -lmlx42 -ldl -lglfw -pthread -lm
 endif
 
 LIBFT_DIR = src/libft
 LIBFT_LIB = src/libft/libft.a
-MLX_DIR = mlx
-MLX_LIB = mlx/libmlx.a
+MLX_DIR = MLX42
+MLX_LIB = MLX42/build/libmlx42.a
 
 COMPILE_MSG = "\033[1;32m[✓]\033[0m Compilando: \033[1;36m"
 LINK_MSG = "\033[1;33m[🔗]\033[0m Enlazando ejecutable: \033[1;35m"
@@ -50,8 +50,8 @@ $(NAME): $(MLX_LIB) $(LIBFT_LIB) $(OBJS)
 	@echo $(SUCCESS_MSG)
 
 $(MLX_LIB):
-	@echo "\033[1;94m[🖥️]\033[0m Compilando MLX..."
-	@make -s -C $(MLX_DIR)
+	@echo "\033[1;94m[🖥️]\033[0m Compilando MLX42..."
+	@cd $(MLX_DIR) && cmake -B build && make -C build
 
 $(LIBFT_LIB):
 	@echo "\033[1;94m[📚]\033[0m Compilando libft..."

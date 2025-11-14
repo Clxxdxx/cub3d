@@ -6,7 +6,7 @@
 /*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 17:14:20 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/14 11:48:31 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 # define CUB3D_H
 # include "fcntl.h"
 # include "src/libft/libft.h"
-# include <mlx.h>
+# include "MLX42/include/MLX42/MLX42.h"
 # include <math.h>
 
 
 # define WINDOW_WIDTH 1024
 # define WINDOW_HEIGHT 768
 
-# define KEY_ESC 53
-# define KEY_W 13
-# define KEY_A 0
-# define KEY_S 1
-# define KEY_D 2
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
+# define KEY_ESC MLX_KEY_ESCAPE
+# define KEY_W MLX_KEY_W
+# define KEY_A MLX_KEY_A
+# define KEY_S MLX_KEY_S
+# define KEY_D MLX_KEY_D
+# define KEY_LEFT MLX_KEY_LEFT
+# define KEY_RIGHT MLX_KEY_RIGHT
 
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.1
@@ -61,8 +61,8 @@ typedef struct s_rgb
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*win;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
 
 	//javier
 	double		player_x;
@@ -124,8 +124,8 @@ void			move_strafe(t_game *game, int keycode, double *new_x, double *new_y);
 // Executor
 int				start_executor(t_game *game);
 void			init_mlx_window(t_game *game);
-int				close_window(t_game *game);
-int				key_press(int keycode, t_game *game);
+void			close_window(void *param);
+void			key_hook(mlx_key_data_t keydata, void *param);
 void			draw_player_info(t_game *game);
 
 #endif

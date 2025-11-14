@@ -6,11 +6,11 @@
 /*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 17:00:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/13 17:07:43 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/14 11:48:31 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../../cub3d.h"
 
 void	rotate_player(t_game *game, int keycode)
 {
