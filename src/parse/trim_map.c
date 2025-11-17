@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 11:22:45 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 14:10:09 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/17 12:38:17 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	map_trimmed(t_game *game)
             in_map = 2;
         if (is_empty_line(game->body_map[j]) == 1 && in_map == 2)
         {
-            ft_putstr_fd("Error\nMap must be the last element of the file", 2);
+            ft_putstr_fd("Error\nMap must be the last element of the file\n", 2);
             exit(1);
         }
 		j++;

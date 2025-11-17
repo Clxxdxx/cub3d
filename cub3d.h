@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/14 11:48:31 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/17 14:13:50 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void			validate_player(t_game *game);
 void			validate_closed_map(t_game *game);
 char			**dup_map(char **map);
 void 			map_trimmed(t_game *game);
+int				line_before_map(t_r_file *file, char *line);
+int 			is_empty_line(char *line);
 
 
 // Frees
