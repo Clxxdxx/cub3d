@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/17 14:13:50 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:50:13 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define ROT_SPEED 0.1
 # define PI 3.14159265359
 
+# define FOV 1.047197551	//pi / 3
 
 //PUTISIMA NORMINETTE
 typedef struct s_r_file
@@ -84,6 +85,34 @@ typedef struct s_game
 	t_rgb		ceiling;
 }				t_game;
 
+typedef struct s_ray
+{
+	double		direction_x;			//posicion a la que apunta x
+	double		direction_y;			//posicion a la que apunta y
+
+	double		step_step_distance_x;	//cuanto avanza para cruzar 1 casilla en x
+	double		step_step_distance_y;	//cuanto avanza para cruzar 1 casilla en y
+
+	double		next_wall_x;			//distancia hasta la próxima linea vertical
+	double		next_wall_y;			//distancia hasta la próxima linea horizontal
+
+	double		wall_distance;			//distancia final a la pared
+
+	int			position_x;				//posicion en la que estamos actual
+	int			position_y;				//posicion en la que estamos actual
+
+	int			walk_y;					//dirección del paso
+	int			walk_x;					//direccion del paso
+
+	int			hit_wall;				//declarar si ha tocado una pared o no
+	int			wall_face;				//que cara de la pared es;
+
+	int			wall_height;			//altura de la linea a dibujar
+	int			draw_from;				//pixel donde empezar
+	int			draw_to;				//pixel donde terminar
+}		t_ray;
+
+
 void			init_game(t_game *game);
 
 // Read file
@@ -129,5 +158,6 @@ void			init_mlx_window(t_game *game);
 void			close_window(void *param);
 void			key_hook(mlx_key_data_t keydata, void *param);
 void			draw_player_info(t_game *game);
+void	perform_raycasting(t_game *game);
 
 #endif
