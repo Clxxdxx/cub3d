@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 11:22:45 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/17 12:38:17 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/19 15:03:05 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,18 @@ int	count_valid_lines(t_game *game)
 	return (count);
 }
 
-int is_empty_line(char *line)
+int	is_empty_line(char *line)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (line[i])
-    {
-        if (line[i] != '\n' && line[i] != ' ')
-            return 1;
-        i++;
-    }
-    return 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '\n' && line[i] != ' ')
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 void	map_trimmed(t_game *game)
@@ -65,11 +65,11 @@ void	map_trimmed(t_game *game)
 	int	j;
 	int	i;
 	int	count;
-    int in_map;
+	int	in_map;
 
-    in_map = 0;
+	in_map = 0;
 	count = count_valid_lines(game);
-	game->map = malloc(sizeof(char *) * (count + 1));
+	game->map = ft_calloc(count + 1, sizeof(char *));
 	if (!game->map)
 		return ;
 	i = 0;
@@ -79,16 +79,18 @@ void	map_trimmed(t_game *game)
 		if (valid_line(game->body_map[j]) == 1 && (in_map == 0 || in_map == 1))
 		{
 			game->map[i] = ft_strdup(game->body_map[j]);
-            in_map = 1;
+			in_map = 1;
 			i++;
 		}
-        if (is_empty_line(game->body_map[j]) == 0 && in_map == 1)
-            in_map = 2;
-        if (is_empty_line(game->body_map[j]) == 1 && in_map == 2)
-        {
-            ft_putstr_fd("Error\nMap must be the last element of the file\n", 2);
-            exit(1);
-        }
+		if (is_empty_line(game->body_map[j]) == 0 && in_map == 1)
+			in_map = 2;
+		if (is_empty_line(game->body_map[j]) == 1 && in_map == 2)
+		{
+			ft_putstr_fd("Error\nMap must be the last element of the file\n",
+				2);
+			cleanup_game(game);
+			exit(1);
+		}
 		j++;
 	}
 	game->map[i] = NULL;
