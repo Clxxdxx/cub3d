@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:11 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 16:35:32 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/19 15:42:55 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ int	main(int argc, char **argv)
 	
 	start_executor(&game);
 	
-	free_matrix(game.file);
-	free_matrix(game.body_map);
-	free(game.routes.so);
-	free(game.routes.no);
-	free(game.routes.we);
-	free(game.routes.ea);
+	cleanup_game(&game);
 	return (0);
 }

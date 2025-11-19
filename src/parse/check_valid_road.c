@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:05:33 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 12:25:28 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/19 12:52:23 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	validate_closed_map(t_game *game)
 	{
 		ft_putstr_fd("Error\nMap is not closed\n", 2);
 		free_matrix(copy);
+		cleanup_game(game);
 		exit(1);
 	}
 	printf("Map closed\n");

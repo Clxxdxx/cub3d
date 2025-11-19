@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:57:44 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/17 15:00:33 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/19 14:32:11 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	err_rep_elements(t_game *game)
 	{
 		ft_putstr_fd("Error\nExpected: 1 NO texture, 1 SO texture,"
 			"1 WE texture,1 EA texture, 1 F color and 1 C color \n", 2);
-		exit(0);
+		free(get_next_line(-1));
+		cleanup_game(game);
+		exit(1);
 	}
 }
 
@@ -28,6 +30,7 @@ void	err_unrec_char(t_game *game, char *trimmed, t_r_file *file)
 	if (char_map(trimmed) == 0)
 	{
 		ft_putstr_fd("Error\nUnrecognized character\n", 2);
+		cleanup_game(game);
 		exit(1);
 	}
 	game->body_map[file->i_map] = ft_strdup(trimmed);
@@ -61,6 +64,8 @@ void	process_line(t_game *game, t_r_file *r_file, int fd)
 			} */
 			err_rep_elements(game);
 			ft_putstr_fd("Error\nLine invalid before the map\n", 2);
+			free(get_next_line(-1));
+			cleanup_game(game);
 			//err_rep_elements(game, &r_file->i_file);
 			//printf("ERROR\nLine:%s%d\nIn map:%d\n", game->file[r_file->i_file], line_before_map(r_file, game->file[r_file->i_file]) ,r_file->in_map);
 			exit(0);
@@ -70,6 +75,7 @@ void	process_line(t_game *game, t_r_file *r_file, int fd)
 		err_unrec_char(game, r_file->trimmed, r_file);
 	r_file->i_file++;
 	r_file->line = get_next_line(fd);
+	//free(get_next_line(-1)); Con esta linea, no hay leaks, pero no funciona
 }
 
 void	read_file(t_game *game, const char *filename, t_r_file *r_file)
@@ -79,12 +85,13 @@ void	read_file(t_game *game, const char *filename, t_r_file *r_file)
 	r_file->i_file = 0;
 	r_file->i_map = 0;
 	r_file->in_map = 0;
-	game->file = malloc(sizeof(char *) * (count_lines(filename) + 1));
-	game->body_map = malloc(sizeof(char *) * (count_lines(filename) + 1));
+	game->file = ft_calloc(count_lines(filename) + 1, sizeof(char *));
+	game->body_map = ft_calloc(count_lines(filename) + 1, sizeof(char *));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 	{
 		ft_putstr_fd("Error\nCan't open the map\n", 2);
+		cleanup_game(game);
 		exit(1);
 	}
 	r_file->line = get_next_line(fd);
@@ -97,6 +104,6 @@ void	read_file(t_game *game, const char *filename, t_r_file *r_file)
 	close(fd);
 	game->file[r_file->i_file] = NULL;
 	game->body_map[r_file->i_map] = NULL;
-	//err_rep_elements(game, &r_file->i_file);
+	//free(get_next_line(-1));
 	validate_player(game);
 }

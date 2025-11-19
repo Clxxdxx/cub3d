@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 12:14:55 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/13 16:44:46 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/19 14:08:54 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ void	free_matrix(char **mtx)
 {
 	int	i;
 
-	i = 0;
 	if (!mtx)
 		return ;
+	i = 0;
 	while (mtx[i])
 	{
-		free(mtx[i]);
+		if (mtx[i])
+			free(mtx[i]);
 		i++;
 	}
 	free(mtx);
@@ -31,7 +32,6 @@ void	cleanup_game(t_game *game)
 {
 	if (!game)
 		return ;
-	
 	if (game->file)
 		free_matrix(game->file);
 	if (game->body_map)
