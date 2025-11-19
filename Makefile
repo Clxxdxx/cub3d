@@ -36,7 +36,7 @@ SRC = src/cub3d.c src/initializer.c src/executor/executor.c src/executor/player.
 	  src/parse/read_file.c src/parse/check_ceilling_floor.c src/parse/check_textures.c \
 	  src/parse/check_filename.c src/parse/utils.c \
 	  src/parse/check_valid_road.c src/parse/trim_map.c \
-	  src/frees/free1.c  src/executor/raycasting.c
+	  src/frees/free1.c  src/executor/raycasting.c src/executor/raycasting_utils.c
 	 
 OBJ_DIR = objects
 OBJS = $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRC))
