@@ -89,16 +89,16 @@ typedef struct s_ray
 	double		direction_x;			//posicion a la que apunta x
 	double		direction_y;			//posicion a la que apunta y
 
-	double		step_step_distance_x;	//cuanto avanza para cruzar 1 casilla en x
-	double		step_step_distance_y;	//cuanto avanza para cruzar 1 casilla en y
+	double		step_distance_x;		//cuanto avanza para cruzar 1 casilla en x
+	double		step_distance_y;		//cuanto avanza para cruzar 1 casilla en y
 
-	double		next_wall_x;			//distancia hasta la próxima linea vertical
-	double		next_wall_y;			//distancia hasta la próxima linea horizontal
+	double		next_side_x;			//distancia hasta la próxima linea vertical
+	double		next_side_y;			//distancia hasta la próxima linea horizontal
 
 	double		wall_distance;			//distancia final a la pared
 
-	int			position_x;				//posicion en la que estamos actual
-	int			position_y;				//posicion en la que estamos actual
+	int			map_position_x;			//posicion en la que estamos actual
+	int			map_position_y;			//posicion en la que estamos actual
 
 	int			walk_y;					//dirección del paso
 	int			walk_x;					//direccion del paso
@@ -157,6 +157,11 @@ void			init_mlx_window(t_game *game);
 void			close_window(void *param);
 void			key_hook(mlx_key_data_t keydata, void *param);
 void			draw_player_info(t_game *game);
-void	perform_raycasting(t_game *game);
+void			do_raycasting(t_game *game);
+
+// Raycasting
+void			execute_dda_algorithm(t_game *game, t_ray *ray);
+void			calculate_wall_height(t_game *game, t_ray *ray);
+void			draw_wall_line(t_game *game, t_ray *ray, int x);
 
 #endif

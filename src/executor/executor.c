@@ -6,7 +6,7 @@
 /*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 00:00:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/17 17:48:56 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/18 23:07:12 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		mlx_delete_image(game->mlx, game->img);
 		game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 		mlx_image_to_window(game->mlx, game->img, 0, 0);
-		draw_player_info(game);
+		do_raycasting(game);
 	}
 }
 
@@ -84,7 +84,7 @@ void	draw_player_info(t_game *game)
 		x = 0;
 		while (x < 100)
 		{
-			mlx_put_pixel(game->img, x + 50, y + 50, 0xFF0000FF);
+			mlx_put_pixel(game->img, x + 50, y + 50, 0x000000FF);
 			x++;
 		}
 		y++;
@@ -100,7 +100,7 @@ int	start_executor(t_game *game)
 {
 	init_player(game);
 	init_mlx_window(game);
-	perform_raycasting(game);
+	do_raycasting(game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_close_hook(game->mlx, close_window, game);
 	draw_player_info(game);
