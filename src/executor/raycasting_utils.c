@@ -6,7 +6,7 @@
 /*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 22:50:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/18 23:07:09 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/20 16:22:35 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	draw_wall_line(t_game *game, t_ray *ray, int x)
 	while (y <= ray->draw_to)
 	{
 		if (ray->wall_face == 0)
-			mlx_put_pixel(game->img, x, y, 0xFF0000FF);
+			mlx_put_pixel(game->img, x, y, 0xFF0000FF);  // Red walls
 		else
-			mlx_put_pixel(game->img, x, y, 0x00FF00FF);
+			mlx_put_pixel(game->img, x, y, 0x00FF00FF);  // Green walls
 		y++;
 	}
 }
