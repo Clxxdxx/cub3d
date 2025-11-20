@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 11:39:10 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/19 14:26:20 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:51:28 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,8 @@ char	*get_path(char *line, char c1, char c2)
 	return (tmp);
 }
 
-int	check_texture(t_game *game, char *line, char c1, char c2)
+void	set_texture(t_game *game, char *route, char c1, char c2)
 {
-	char	*route;
-	int		fd;
-
-	route = get_path(line, c1, c2);
-	if (!route)
-		return (0);
-	fd = open(route, O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr_fd("Error\nInvalid texture path\n", 2);
-		free(route);
-		cleanup_game(game);
-		free(get_next_line(-1));
-		exit(0);
-	}
-	close(fd);
 	if (c1 == 'N' && c2 == 'O')
 	{
 		if (game->routes.no)
@@ -71,6 +55,27 @@ int	check_texture(t_game *game, char *line, char c1, char c2)
 			free(game->routes.ea);
 		game->routes.ea = route;
 	}
+}
+
+int	check_texture(t_game *game, char *line, char c1, char c2)
+{
+	char	*route;
+	int		fd;
+
+	route = get_path(line, c1, c2);
+	if (!route)
+		return (0);
+	fd = open(route, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putstr_fd("Error\nInvalid texture path\n", 2);
+		free(route);
+		cleanup_game(game);
+		free(get_next_line(-1));
+		exit(0);
+	}
+	close(fd);
+	set_texture(game, route, c1, c2);
 	return (1);
 }
 

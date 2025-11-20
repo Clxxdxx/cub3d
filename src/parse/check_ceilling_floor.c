@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:41:48 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/19 15:02:25 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:25:54 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,7 @@ int	parse_color_val(char *str, t_game *game, char *tmp, char **rgb)
 		if (!ft_isdigit(str[i]) && str[i] != ',')
 		{
 			ft_putstr_fd("Error\nColor value is invalid\n", 2);
-			if (rgb)
-				free_matrix(rgb);
-			if (tmp)
-				free(tmp);
-			free(get_next_line(-1));
-			cleanup_game(game);
-			exit(1);
+			exit_parse_color(game, rgb, tmp);
 		}
 		i++;
 	}
@@ -37,13 +31,7 @@ int	parse_color_val(char *str, t_game *game, char *tmp, char **rgb)
 	if (val < 0 || val > 255)
 	{
 		ft_putstr_fd("Error\nColor value is invalid\n", 2);
-		if (rgb)
-			free_matrix(rgb);
-		if (tmp)
-			free(tmp);
-		free(get_next_line(-1));
-		cleanup_game(game);
-		exit(1);
+		exit_parse_color(game, rgb, tmp);
 	}
 	return (val);
 }
@@ -70,26 +58,20 @@ int	check_ceiling(t_game *game, char *line)
 	char	*tmp;
 	char	**rgb;
 
+	rgb = NULL;
 	tmp = get_rgb(line, 'C');
 	if (!tmp)
 		return (0);
 	if (ft_count_char(tmp, ',') != 2)
 	{
 		ft_putstr_fd("Error\nInvalid ceiling format\n", 2);
-		free(tmp);
-		free(get_next_line(-1));
-		cleanup_game(game);
-		exit(1);
+		exit_c_f_format(game, tmp, rgb);
 	}
 	rgb = ft_split(tmp, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
 	{
 		ft_putstr_fd("Error\nInvalid ceiling format\n", 2);
-		free(tmp);
-		free_matrix(rgb);
-		free(get_next_line(-1));
-		cleanup_game(game);
-		exit(1);
+		exit_c_f_format(game, tmp, rgb);
 	}
 	game->ceiling.r = parse_color_val(rgb[0], game, tmp, rgb);
 	game->ceiling.g = parse_color_val(rgb[1], game, tmp, rgb);
@@ -104,26 +86,20 @@ int	check_floor(t_game *game, char *line)
 	char	*tmp;
 	char	**rgb;
 
+	rgb = NULL;
 	tmp = get_rgb(line, 'F');
 	if (!tmp)
 		return (0);
 	if (ft_count_char(tmp, ',') != 2)
 	{
-		ft_putstr_fd("Error\nInvalid floor format1\n", 2);
-		free(tmp);
-		free(get_next_line(-1));
-		cleanup_game(game);
-		exit(1);
+		ft_putstr_fd("Error\nInvalid floor format\n", 2);
+		exit_c_f_format(game, tmp, rgb);
 	}
 	rgb = ft_split(tmp, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
 	{
 		ft_putstr_fd("Error\nInvalid floor format\n", 2);
-		free(tmp);
-		free(get_next_line(-1));
-		free_matrix(rgb);
-		cleanup_game(game);
-		exit(1);
+		exit_c_f_format(game, tmp, rgb);
 	}
 	game->floor.r = parse_color_val(rgb[0], game, tmp, rgb);
 	game->floor.g = parse_color_val(rgb[1], game, tmp, rgb);

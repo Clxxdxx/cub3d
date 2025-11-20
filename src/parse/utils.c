@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 10:53:56 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/19 12:53:03 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:08:28 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,34 +121,8 @@ void	validate_player(t_game *game)
 	if (count != 1)
 	{
 		ft_putstr_fd("Error\nMap must have only one player start position(W, A,"
-						" S, D)\n",
-						2);
+			" S, D)\n", 2);
 		cleanup_game(game);
 		exit(1);
 	}
-}
-
-int	line_before_map(t_r_file *file, char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ' || (line[i] >= 9 && line[i] <= 13))
-		i++;
-	if ((line[i] == 'F' || line[i] == 'C') && (line[i + 1] == ' ' || line[i
-			+ 1] == '\t'))
-		return (1);
-	if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' '
-		&& file->in_map == 0)
-		return (1);
-	if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' '
-		&& file->in_map == 0)
-		return (1);
-	if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' '
-		&& file->in_map == 0)
-		return (1);
-	if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' '
-		&& file->in_map == 0)
-		return (1);
-	return (0);
 }
