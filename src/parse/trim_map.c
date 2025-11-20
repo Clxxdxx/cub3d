@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 11:22:45 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/19 15:03:05 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:33:52 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,25 @@ int	is_empty_line(char *line)
 	return (0);
 }
 
+void	process_map_line(t_game *game, int *in_map, int *i, int *j)
+{
+	if (valid_line(game->body_map[*j]) == 1 && (*in_map == 0 || *in_map == 1))
+	{
+		game->map[*i] = ft_strdup(game->body_map[*j]);
+		*in_map = 1;
+		(*i)++;
+	}
+	if (is_empty_line(game->body_map[*j]) == 0 && *in_map == 1)
+		*in_map = 2;
+	if (is_empty_line(game->body_map[*j]) == 1 && *in_map == 2)
+	{
+		ft_putstr_fd("Error\nMap must be the last element of the file\n", 2);
+		cleanup_game(game);
+		exit(1);
+	}
+	(*j)++;
+}
+
 void	map_trimmed(t_game *game)
 {
 	int	j;
@@ -75,23 +94,6 @@ void	map_trimmed(t_game *game)
 	i = 0;
 	j = 0;
 	while (game->body_map[j])
-	{
-		if (valid_line(game->body_map[j]) == 1 && (in_map == 0 || in_map == 1))
-		{
-			game->map[i] = ft_strdup(game->body_map[j]);
-			in_map = 1;
-			i++;
-		}
-		if (is_empty_line(game->body_map[j]) == 0 && in_map == 1)
-			in_map = 2;
-		if (is_empty_line(game->body_map[j]) == 1 && in_map == 2)
-		{
-			ft_putstr_fd("Error\nMap must be the last element of the file\n",
-				2);
-			cleanup_game(game);
-			exit(1);
-		}
-		j++;
-	}
+		process_map_line(game, &in_map, &i, &j);
 	game->map[i] = NULL;
 }

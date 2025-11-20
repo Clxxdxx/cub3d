@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/19 15:43:04 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:25:15 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void			check_file_extension(char *filename);
 void			check_floor_ceiling(t_game *game, char *line);
 int				get_max_width(char **map);
 int				check_texture(t_game *game, char *line, char c1, char c2);
-void			complete_with_x(char **map);
 int				char_map(char *line);
 int				count_lines(const char *filename);
 int				get_max_width(char **map);
@@ -136,6 +135,8 @@ char			**dup_map(char **map);
 void 			map_trimmed(t_game *game);
 int				line_before_map(t_r_file *file, char *line);
 int 			is_empty_line(char *line);
+void			exit_c_f_format(t_game *game, char *tmp, char **rgb);
+void			exit_parse_color(t_game *game, char **rgb, char *tmp);
 
 
 // Frees

@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:57:44 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/19 14:32:11 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:01:32 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,14 @@ void	process_line(t_game *game, t_r_file *r_file, int fd)
 		check_texture_elements(game, &r_file->i_file);
 		if (config_ready(game))
 			r_file->in_map = 1;
-		if(line_before_map(r_file, game->file[r_file->i_file]) == 0 && is_empty_line(game->file[r_file->i_file]) == 1 && r_file->in_map == 0)
+		if (line_before_map(r_file, game->file[r_file->i_file]) == 0
+			&& is_empty_line(game->file[r_file->i_file]) == 1
+			&& r_file->in_map == 0)
 		{
-			/* if (game->c_tex_so > 1 || game->c_tex_no > 1 || game->c_tex_we > 1
-		|| game->c_tex_ea > 1 || game->c_f_color > 1 || game->c_c_color > 1)
-			{
-				printf("Repeated elements\n");
-				exit(0);
-			} */
 			err_rep_elements(game);
 			ft_putstr_fd("Error\nLine invalid before the map\n", 2);
 			free(get_next_line(-1));
 			cleanup_game(game);
-			//err_rep_elements(game, &r_file->i_file);
-			//printf("ERROR\nLine:%s%d\nIn map:%d\n", game->file[r_file->i_file], line_before_map(r_file, game->file[r_file->i_file]) ,r_file->in_map);
 			exit(0);
 		}
 	}
@@ -75,7 +69,6 @@ void	process_line(t_game *game, t_r_file *r_file, int fd)
 		err_unrec_char(game, r_file->trimmed, r_file);
 	r_file->i_file++;
 	r_file->line = get_next_line(fd);
-	//free(get_next_line(-1)); Con esta linea, no hay leaks, pero no funciona
 }
 
 void	read_file(t_game *game, const char *filename, t_r_file *r_file)
@@ -104,6 +97,5 @@ void	read_file(t_game *game, const char *filename, t_r_file *r_file)
 	close(fd);
 	game->file[r_file->i_file] = NULL;
 	game->body_map[r_file->i_map] = NULL;
-	//free(get_next_line(-1));
 	validate_player(game);
 }

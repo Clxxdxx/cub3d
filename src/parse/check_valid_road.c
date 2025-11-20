@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 11:05:33 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/19 12:52:23 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/20 12:06:10 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,5 @@ void	validate_closed_map(t_game *game)
 		cleanup_game(game);
 		exit(1);
 	}
-	printf("Map closed\n");
 	free_matrix(copy);
 }
