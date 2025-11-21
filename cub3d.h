@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/20 14:25:15 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/21 14:22:39 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@
 # define PI 3.14159265359
 
 # define FOV 1.047197551	//pi / 3
+
+# define MINIMAP_WIDTH 200
+# define MINIMAP_HEIGHT 200
+# define MINIMAP_WALL_COLOR 0x000000
+# define MINIMAP_PLAYER_COLOR 0xFFFF00
+# define MINIMAP_FLOOR_COLOR 0xCDCDCD
 
 typedef struct s_r_file
 {
@@ -111,6 +117,19 @@ typedef struct s_ray
 	int			draw_to;				//pixel donde terminar
 }		t_ray;
 
+typedef struct s_minimap
+{
+	int			width_scale;
+	int			height_scale;
+	int			scale;
+	int			origin_x;
+	int			origin_y;
+	int			pixel_x;
+	int			pixel_y;
+	int			player_pixel_x;
+	int			player_pixel_y;
+}	t_minimap;
+
 
 void			init_game(t_game *game);
 
@@ -124,6 +143,10 @@ void			check_texture_elements(t_game *game, int *i);
 int				check_texture(t_game *game, char *line, char c1, char c2);
 void			check_file_extension(char *filename);
 void			check_floor_ceiling(t_game *game, char *line);
+void			exit_c_f_format(t_game *game, char *tmp, char **rgb);
+void			exit_parse_color(t_game *game, char **rgb, char *tmp);
+
+//Utils
 int				get_max_width(char **map);
 int				check_texture(t_game *game, char *line, char c1, char c2);
 int				char_map(char *line);
@@ -135,8 +158,6 @@ char			**dup_map(char **map);
 void 			map_trimmed(t_game *game);
 int				line_before_map(t_r_file *file, char *line);
 int 			is_empty_line(char *line);
-void			exit_c_f_format(t_game *game, char *tmp, char **rgb);
-void			exit_parse_color(t_game *game, char **rgb, char *tmp);
 
 
 // Frees

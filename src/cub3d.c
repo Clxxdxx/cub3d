@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:11 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/20 14:56:13 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/21 11:37:21 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 	t_r_file r_file;
 	if (argc != 2)
 	{
-		ft_printf("Error\n");
+		ft_printf("Error\nExecute: ./cub3d maps/map.cub\n");
 		return (0);
 	}
 	init_game(&game);
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 	printf("Floor   (F): R:%d G:%d B:%d\n", game.floor.r, game.floor.g,
 		game.floor.b);
 	// 🗺️ Mostrar mapa
-	//complete_with_x(game.map);
+
 	printf("\n--- MAPA ---\n");
 	for (int i = 0; game.map[i]; i++)
 		printf("%s\n", game.map[i]);

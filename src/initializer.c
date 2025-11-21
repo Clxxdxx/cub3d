@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:49:22 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/14 11:48:31 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/21 12:57:06 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,17 @@ void	init_game(t_game *game)
 	game->routes.so = NULL;
 	game->routes.we = NULL;
 	game->routes.ea = NULL;
+}
+
+void init_minimap(t_minimap *minimap)
+{
+	minimap->height_scale = 0;
+	minimap->origin_x = 0;
+	minimap->origin_y = 0;
+	minimap->pixel_x = 0;
+	minimap->pixel_y = 0;
+	minimap->player_pixel_x = 0;
+	minimap->player_pixel_y = 0;
+	minimap->scale = 0;
+	minimap->width_scale = 0;
 }
