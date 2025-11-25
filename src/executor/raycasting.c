@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 16:30:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/24 15:00:03 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:18:06 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
-
-static	void	print_map_black(t_game *game, int x, int y)
-{
-	y = 0;
-	while (y < WINDOW_HEIGHT)
-	{
-		x = 0;
-		while (x < WINDOW_WIDTH)
-		{
-			mlx_put_pixel(game->img, x, y, 0x000000FF);
-			x++;
-		}
-		y++;
-	}
-}
 
 static	void	init_ray_of_column(t_game *game, t_ray *ray, int x)
 {
@@ -76,7 +61,6 @@ void	do_raycasting(t_game *game)
 	t_ray	ray;
 	int		x;
 
-	print_map_black(game, 0, 0);
 	x = 0;
 	while (x < WINDOW_WIDTH)
 	{

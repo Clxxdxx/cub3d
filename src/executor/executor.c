@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 00:00:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/25 12:16:45 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:05:16 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,6 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		fill_pixels(game, &game->minimap);
     	mlx_image_to_window(game->mlx, game->minimap_img, 0, 0);
 	}
-}
-
-/*
-esto no vale, solo es para poner mensajes en pantalla
-*/
-void	draw_player_info(t_game *game)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < 100)
-	{
-		x = 0;
-		while (x < 100)
-		{
-			mlx_put_pixel(game->img, x + 50, y + 50, 0x000000FF);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_pixel(game->img, (int)game->player_x * 10 + 50, 
-		(int)game->player_y * 10 + 50, 0x00FF00FF);
 }
 
 /*

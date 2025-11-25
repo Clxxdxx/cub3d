@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/25 15:15:35 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/25 17:05:32 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,6 @@ int				start_executor(t_game *game);
 void			init_mlx_window(t_game *game);
 void			close_window(void *param);
 void			key_hook(mlx_key_data_t keydata, void *param);
-void			draw_player_info(t_game *game);
 void			do_raycasting(t_game *game);
 
 // Raycasting
