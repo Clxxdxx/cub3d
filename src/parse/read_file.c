@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 11:57:44 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/20 12:01:32 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:53:55 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	err_unrec_char(t_game *game, char *trimmed, t_r_file *file)
 	if (char_map(trimmed) == 0)
 	{
 		ft_putstr_fd("Error\nUnrecognized character\n", 2);
+		free(get_next_line(-1));
 		cleanup_game(game);
 		exit(1);
 	}

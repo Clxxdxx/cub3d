@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/21 14:22:39 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:15:35 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@
 
 # define FOV 1.047197551	//pi / 3
 
-# define MINIMAP_WIDTH 200
-# define MINIMAP_HEIGHT 200
-# define MINIMAP_WALL_COLOR 0x000000
-# define MINIMAP_PLAYER_COLOR 0xFFFF00
-# define MINIMAP_FLOOR_COLOR 0xCDCDCD
+# define MINIMAP_WIDTH 400
+# define MINIMAP_HEIGHT 400
+# define MINIMAP_WALL_COLOR 0x804000FF
+# define MINIMAP_PLAYER_COLOR 0xFE0000FF
+# define MINIMAP_FLOOR_COLOR 0xCDCDCDFF
 
 typedef struct s_r_file
 {
@@ -65,10 +65,32 @@ typedef struct s_rgb
 	int			b;
 }				t_rgb;
 
+typedef struct s_minimap
+{
+	int			width_scale;
+	int			height_scale;
+	int			scale;
+	int			origin_x;
+	int			origin_y;
+	int			pixel_x;
+	int			pixel_y;
+	int			player_pixel_x;
+	int			player_pixel_y;
+}	t_minimap;
+
+typedef struct s_square
+{
+	int x;
+	int y;
+	int size;
+	uint32_t color;
+}	t_square;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t *minimap_img;
 
 	//javier
 	double		player_x;
@@ -88,6 +110,7 @@ typedef struct s_game
 	t_routes	routes;
 	t_rgb		floor;
 	t_rgb		ceiling;
+	t_minimap	minimap;
 }				t_game;
 
 typedef struct s_ray
@@ -117,21 +140,10 @@ typedef struct s_ray
 	int			draw_to;				//pixel donde terminar
 }		t_ray;
 
-typedef struct s_minimap
-{
-	int			width_scale;
-	int			height_scale;
-	int			scale;
-	int			origin_x;
-	int			origin_y;
-	int			pixel_x;
-	int			pixel_y;
-	int			player_pixel_x;
-	int			player_pixel_y;
-}	t_minimap;
 
 
 void			init_game(t_game *game);
+void 			init_minimap(t_minimap *minimap);
 
 // Read file
 void	read_file(t_game *game, const char *filename, t_r_file *file);
@@ -185,5 +197,10 @@ void			do_raycasting(t_game *game);
 void			execute_dda_algorithm(t_game *game, t_ray *ray);
 void			calculate_wall_height(t_game *game, t_ray *ray);
 void			draw_wall_line(t_game *game, t_ray *ray, int x);
+
+// Minimap
+void	calculate_ceil_px_minimap(t_game *game, t_minimap *minimap);
+void	fill_pixels(t_game *game, t_minimap *minimap);
+void create_minimap(t_game *game);
 
 #endif

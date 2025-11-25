@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:11 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/21 11:37:21 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:15:38 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 	t_r_file r_file;
+	//t_minimap minimap;
+	
 	if (argc != 2)
 	{
 		ft_printf("Error\nExecute: ./cub3d maps/map.cub\n");
 		return (0);
 	}
 	init_game(&game);
+	init_minimap(&game.minimap);
 	check_file_extension(argv[1]);
 	read_file(&game, argv[1], &r_file);
 	validate_closed_map(&game);
@@ -38,14 +41,17 @@ int	main(int argc, char **argv)
 		game.ceiling.b);
 	printf("Floor   (F): R:%d G:%d B:%d\n", game.floor.r, game.floor.g,
 		game.floor.b);
+			
 	// 🗺️ Mostrar mapa
-
 	printf("\n--- MAPA ---\n");
 	for (int i = 0; game.map[i]; i++)
 		printf("%s\n", game.map[i]);
-	
+			
 	start_executor(&game);
+	create_minimap(&game);		
 	
+	//mlx_loop_hook(game.mlx, game)
+	mlx_loop(game.mlx);
 	cleanup_game(&game);
 	return (0);
 }

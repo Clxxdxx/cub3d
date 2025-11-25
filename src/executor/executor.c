@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 00:00:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/18 23:07:12 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/25 12:16:45 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		game->img = mlx_new_image(game->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 		mlx_image_to_window(game->mlx, game->img, 0, 0);
 		do_raycasting(game);
+		fill_pixels(game, &game->minimap);
+    	mlx_image_to_window(game->mlx, game->minimap_img, 0, 0);
 	}
 }
 
@@ -104,6 +106,8 @@ int	start_executor(t_game *game)
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_close_hook(game->mlx, close_window, game);
 	draw_player_info(game);
-	mlx_loop(game->mlx);
+	//El loop tiene que ir en el main porque sino bloquea la ejecucion
+	//y no crea el minimapa
+	//mlx_loop(game->mlx);
 	return (0);
 }
