@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 00:00:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/25 17:05:16 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/26 10:47:57 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int	start_executor(t_game *game)
 	do_raycasting(game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_close_hook(game->mlx, close_window, game);
-	draw_player_info(game);
 	//El loop tiene que ir en el main porque sino bloquea la ejecucion
 	//y no crea el minimapa
 	//mlx_loop(game->mlx);

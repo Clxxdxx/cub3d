@@ -6,69 +6,81 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 11:42:29 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/25 15:17:26 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/26 14:45:50 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-
-void	draw_square(mlx_image_t *img, int x, int y, int size, uint32_t color)
+void	draw_square(mlx_image_t *img, t_square sq)
 {
-	int i, j;
+	int	i;
+	int	j;
+
 	j = 0;
-	while (j < size)
+	while (j < sq.size)
 	{
 		i = 0;
-		while (i < size)
+		while (i < sq.size)
 		{
-			mlx_put_pixel(img, x + i, y + j, color);
+			mlx_put_pixel(img, sq.x + i, sq.y + j, sq.color);
 			i++;
 		}
 		j++;
 	}
 }
 
+void	print_wall_floor(t_square sq, t_game *game, char tile, int *col)
+{
+	if (tile == '1' || tile == ' ')
+	{
+		sq.color = MINIMAP_WALL_COLOR;
+		draw_square(game->minimap_img, sq);
+	}
+	else
+	{
+		sq.color = MINIMAP_FLOOR_COLOR;
+		draw_square(game->minimap_img, sq);
+	}
+	(*col)++;
+}
+
+void	print_player(t_square sq, t_game *game, t_minimap *minimap)
+{
+	sq.x = (minimap->origin_x + (game->player_x * minimap->scale)) - 2;
+	sq.y = (minimap->origin_y + (game->player_y * minimap->scale)) - 2;
+	sq.color = MINIMAP_PLAYER_COLOR;
+	sq.size = 6;
+	draw_square(game->minimap_img, sq);
+}
+
 void	fill_pixels(t_game *game, t_minimap *minimap)
 {
-	int		row;
-	int		col;
-	int		pixel_x;
-	int		pixel_y;
-	int		max_width;
-	int		len;
-	char	tile;
+	int			row;
+	int			col;
+	int			len;
+	char		tile;
+	t_square	sq;
 
-	max_width = get_max_width(game->map);
 	row = 0;
 	while (game->map[row])
 	{
 		len = ft_strlen(game->map[row]);
 		col = 0;
-		while (col < max_width)
+		while (col < get_max_width(game->map))
 		{
 			if (col < len)
 				tile = game->map[row][col];
 			else
 				tile = ' ';
-			pixel_x = minimap->origin_x + col * minimap->scale;
-			pixel_y = minimap->origin_y + row * minimap->scale;
-			if (tile == '1' || tile == ' ')
-				draw_square(game->minimap_img, pixel_x, pixel_y, minimap->scale,
-					MINIMAP_WALL_COLOR);
-			else
-				draw_square(game->minimap_img, pixel_x, pixel_y, minimap->scale,
-					MINIMAP_FLOOR_COLOR);
-			col++;
+			sq.x = minimap->origin_x + col * minimap->scale;
+			sq.y = minimap->origin_y + row * minimap->scale;
+			sq.size = minimap->scale;
+			print_wall_floor(sq, game, tile, &col);
 		}
 		row++;
 	}
-	minimap->player_pixel_x = minimap->origin_x + (game->player_x
-			* minimap->scale);
-	minimap->player_pixel_y = minimap->origin_y + (game->player_y
-			* minimap->scale);
-	draw_square(game->minimap_img, minimap->player_pixel_x - 2,
-		minimap->player_pixel_y - 2, 6, MINIMAP_PLAYER_COLOR);
+	print_player(sq, game, minimap);
 }
 
 void	create_minimap(t_game *game)
