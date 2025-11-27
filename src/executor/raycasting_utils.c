@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 22:50:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/26 11:02:25 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/27 15:30:52 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	execute_dda_algorithm(t_game *game, t_ray *ray)
 void	calculate_wall_height(t_game *game, t_ray *ray)
 {
 	if (ray->wall_face == 0)
-		ray->wall_distance = (ray->map_position_x - game->player_x
-				+ (1 - ray->walk_x) / 2) / ray->direction_x;
+		ray->wall_distance = (ray->map_position_x - game->player_x + (1
+					- ray->walk_x) / 2) / ray->direction_x;
 	else
-		ray->wall_distance = (ray->map_position_y - game->player_y
-				+ (1 - ray->walk_y) / 2) / ray->direction_y;
+		ray->wall_distance = (ray->map_position_y - game->player_y + (1
+					- ray->walk_y) / 2) / ray->direction_y;
 	ray->wall_height = (int)(WINDOW_HEIGHT / ray->wall_distance);
 	ray->draw_from = (-ray->wall_height / 2) + (WINDOW_HEIGHT / 2);
 	ray->draw_to = (ray->wall_height / 2) + (WINDOW_HEIGHT / 2);
@@ -52,27 +52,27 @@ void	calculate_wall_height(t_game *game, t_ray *ray)
 
 void	draw_wall_line(t_game *game, t_ray *ray, int x)
 {
-	int	y;
-	int	ceiling_color;
-	int	floor_color;
+	mlx_texture_t	*tex;
+	double			step;
+	double			tex_pos;
+	int				y;
+	int				tex_y;
 
-	ceiling_color = (game->ceiling.r << 24) | (game->ceiling.g << 16)
-		| (game->ceiling.b << 8) | 255;
-	floor_color = (game->floor.r << 24) | (game->floor.g << 16)
-		| (game->floor.b << 8) | 255;
-	y = 0;
-	while (y < ray->draw_from)
-		mlx_put_pixel(game->img, x, y++, ceiling_color);
+	tex = set_orientation_texture(ray, game);
+	put_pixels_ceiling(game, ray, &y, x);
+	calculate_tex_coords(ray, game, tex, &step);
+	tex_pos = (ray->draw_from - WINDOW_HEIGHT / 2 + ray->wall_height / 2)
+		* step;
 	y = ray->draw_from;
 	while (y <= ray->draw_to)
 	{
-		if (ray->wall_face == 0)
-			mlx_put_pixel(game->img, x, y, 0xFF0000FF);
-		else
-			mlx_put_pixel(game->img, x, y, 0x00FF00FF);
+		tex_y = (int)tex_pos % tex->height;
+		if (tex_y < 0)
+			tex_y += tex->height;
+
+		tex_pos += step;
+		mlx_put_pixel(game->img, x, y, draw_rgba_pixel(tex, ray, tex_y));
 		y++;
 	}
-	y = ray->draw_to + 1;
-	while (y < WINDOW_HEIGHT)
-		mlx_put_pixel(game->img, x, y++, floor_color);
+	put_pixels_floor(game, ray, &y, x);
 }

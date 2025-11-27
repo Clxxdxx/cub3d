@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:11 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/25 12:15:38 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/27 14:59:16 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ int	main(int argc, char **argv)
 	printf("SO: %s\n", game.routes.so);
 	printf("WE: %s\n", game.routes.we);
 	printf("EA: %s\n", game.routes.ea);
+	game.textures.no = mlx_load_png(game.routes.no);
+	game.textures.so = mlx_load_png(game.routes.so);
+	game.textures.we = mlx_load_png(game.routes.we);
+	game.textures.ea = mlx_load_png(game.routes.ea);
+	if (!game.textures.no || !game.textures.so ||
+    !game.textures.we || !game.textures.ea)
+	{
+		ft_putstr_fd("Error\nFailed to load textures\n", 2);
+		exit(1);
+	}
 	// 🟫 Mostrar colores de suelo y cielo
 	printf("\n--- COLORES ---\n");
 	printf("Ceiling (C): R:%d G:%d B:%d\n", game.ceiling.r, game.ceiling.g,
@@ -50,7 +60,6 @@ int	main(int argc, char **argv)
 	start_executor(&game);
 	create_minimap(&game);		
 	
-	//mlx_loop_hook(game.mlx, game)
 	mlx_loop(game.mlx);
 	cleanup_game(&game);
 	return (0);

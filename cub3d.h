@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/25 17:05:32 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/27 14:29:54 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,15 @@ typedef struct s_routes
 	char		*ea;
 }				t_routes;
 
+typedef struct s_textures
+{
+    mlx_texture_t *no;
+    mlx_texture_t *so;
+    mlx_texture_t *we;
+    mlx_texture_t *ea;
+}   t_textures;
+
+
 typedef struct s_rgb
 {
 	int			r;
@@ -107,6 +116,7 @@ typedef struct s_game
 	int			c_tex_ea;
 	int			c_f_color;
 	int			c_c_color;
+	t_textures  textures;
 	t_routes	routes;
 	t_rgb		floor;
 	t_rgb		ceiling;
@@ -138,6 +148,8 @@ typedef struct s_ray
 	int			wall_height;			//altura de la linea a dibujar
 	int			draw_from;				//pixel donde empezar
 	int			draw_to;				//pixel donde terminar
+	double      wall_x;
+	int			tex_x;
 }		t_ray;
 
 
@@ -196,10 +208,17 @@ void			do_raycasting(t_game *game);
 void			execute_dda_algorithm(t_game *game, t_ray *ray);
 void			calculate_wall_height(t_game *game, t_ray *ray);
 void			draw_wall_line(t_game *game, t_ray *ray, int x);
+mlx_texture_t	*set_orientation_texture(t_ray *ray, t_game *game);
+uint32_t		draw_rgba_pixel(mlx_texture_t *tex, t_ray *ray, int tex_y);
+void 			calculate_tex_coords(t_ray *ray, t_game *game, mlx_texture_t *tex, double *step);
+void			put_pixels_ceiling(t_game *game, t_ray *ray, int *y, int x);
+void			put_pixels_floor(t_game *game, t_ray *ray, int *y, int x);
+
+
 
 // Minimap
 void	calculate_ceil_px_minimap(t_game *game, t_minimap *minimap);
 void	fill_pixels(t_game *game, t_minimap *minimap);
-void create_minimap(t_game *game);
+void 	create_minimap(t_game *game);
 
 #endif

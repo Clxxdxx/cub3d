@@ -1,14 +1,10 @@
 
 F 25,0,0
 
-SO                ./imgs/murosur.png
-
-NO ./imgs/muronorte.png
-
-WE ./imgs/murooeste.png
-
-
-                                EA     ./imgs/muroeste.png
+SO ./imgs/vsur.png
+WE ./imgs/voeste.png
+EA ./imgs/veste.png
+NO ./imgs/vnorte.png
                                 
 C    0,21,0
 
