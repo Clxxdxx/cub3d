@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:11 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/27 14:59:16 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/28 10:58:42 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
     !game.textures.we || !game.textures.ea)
 	{
 		ft_putstr_fd("Error\nFailed to load textures\n", 2);
+		cleanup_game(&game);
 		exit(1);
 	}
 	// 🟫 Mostrar colores de suelo y cielo

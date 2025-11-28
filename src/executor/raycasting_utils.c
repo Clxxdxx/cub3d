@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/18 22:50:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/27 15:30:52 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:25:49 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,20 @@ void	execute_dda_algorithm(t_game *game, t_ray *ray)
 	}
 }
 
-void	calculate_wall_height(t_game *game, t_ray *ray)
+void	calculate_wall_height(t_game *game, t_ray *ray, int x)
 {
+	double	camera_x;
+	double	ray_angle;
+
 	if (ray->wall_face == 0)
 		ray->wall_distance = (ray->map_position_x - game->player_x + (1
 					- ray->walk_x) / 2) / ray->direction_x;
 	else
 		ray->wall_distance = (ray->map_position_y - game->player_y + (1
 					- ray->walk_y) / 2) / ray->direction_y;
+	camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
+	ray_angle = game->player_angle + atan(camera_x * tan(FOV / 2));
+	ray->wall_distance *= cos(ray_angle - game->player_angle);
 	ray->wall_height = (int)(WINDOW_HEIGHT / ray->wall_distance);
 	ray->draw_from = (-ray->wall_height / 2) + (WINDOW_HEIGHT / 2);
 	ray->draw_to = (ray->wall_height / 2) + (WINDOW_HEIGHT / 2);
@@ -69,7 +75,6 @@ void	draw_wall_line(t_game *game, t_ray *ray, int x)
 		tex_y = (int)tex_pos % tex->height;
 		if (tex_y < 0)
 			tex_y += tex->height;
-
 		tex_pos += step;
 		mlx_put_pixel(game->img, x, y, draw_rgba_pixel(tex, ray, tex_y));
 		y++;

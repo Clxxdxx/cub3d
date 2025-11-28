@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
+/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/13 16:30:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/25 16:18:06 by jbogad           ###   ########.fr       */
+/*   Updated: 2025/11/28 11:17:45 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	do_raycasting(t_game *game)
 		init_ray_of_column(game, &ray, x);
 		init_ray_of_column_y(game, &ray);
 		execute_dda_algorithm(game, &ray);
-		calculate_wall_height(game, &ray);
+		calculate_wall_height(game, &ray, x);
 		draw_wall_line(game, &ray, x);
 		x++;
 	}

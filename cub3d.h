@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:34 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/27 14:29:54 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/11/28 11:17:56 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,7 +206,7 @@ void			do_raycasting(t_game *game);
 
 // Raycasting
 void			execute_dda_algorithm(t_game *game, t_ray *ray);
-void			calculate_wall_height(t_game *game, t_ray *ray);
+void			calculate_wall_height(t_game *game, t_ray *ray, int x);
 void			draw_wall_line(t_game *game, t_ray *ray, int x);
 mlx_texture_t	*set_orientation_texture(t_ray *ray, t_game *game);
 uint32_t		draw_rgba_pixel(mlx_texture_t *tex, t_ray *ray, int tex_y);
