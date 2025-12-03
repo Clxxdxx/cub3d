@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 00:00:00 by jbogad            #+#    #+#             */
-/*   Updated: 2025/11/26 10:47:57 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/12/03 09:45:29 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-/*
-abrir la ventana
-*/
 void	init_mlx_window(t_game *game)
 {
 	game->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D", false);
@@ -33,9 +30,6 @@ void	init_mlx_window(t_game *game)
 	mlx_image_to_window(game->mlx, game->img, 0, 0);
 }
 
-/*
-cerrar la ventana
-*/
 void	close_window(void *param)
 {
 	t_game	*game;
@@ -47,9 +41,6 @@ void	close_window(void *param)
 	exit(0);
 }
 
-/*
-manejar las teclas
-*/
 void	key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
@@ -60,7 +51,7 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 	else if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_A
 			|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_D
 			|| keydata.key == MLX_KEY_LEFT || keydata.key == MLX_KEY_RIGHT)
-			&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+		&& (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
 	{
 		move_player(game, keydata.key);
 		mlx_delete_image(game->mlx, game->img);
@@ -68,13 +59,10 @@ void	key_hook(mlx_key_data_t keydata, void *param)
 		mlx_image_to_window(game->mlx, game->img, 0, 0);
 		do_raycasting(game);
 		fill_pixels(game, &game->minimap);
-    	mlx_image_to_window(game->mlx, game->minimap_img, 0, 0);
+		mlx_image_to_window(game->mlx, game->minimap_img, 0, 0);
 	}
 }
 
-/*
-
-*/
 int	start_executor(t_game *game)
 {
 	init_player(game);
@@ -82,8 +70,5 @@ int	start_executor(t_game *game)
 	do_raycasting(game);
 	mlx_key_hook(game->mlx, key_hook, game);
 	mlx_close_hook(game->mlx, close_window, game);
-	//El loop tiene que ir en el main porque sino bloquea la ejecucion
-	//y no crea el minimapa
-	//mlx_loop(game->mlx);
 	return (0);
 }

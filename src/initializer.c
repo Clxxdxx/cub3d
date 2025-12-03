@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jbogad <jbogad@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:49:22 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/25 15:15:50 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/12/03 09:42:10 by jbogad           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,13 @@
 
 void	init_game(t_game *game)
 {
-	// Inicializar punteros MLX
 	game->mlx = NULL;
 	game->img = NULL;
 	game->minimap_img = NULL;
-	// Inicializar datos del jugador
 	game->player_x = 0.0;
 	game->player_y = 0.0;
 	game->player_angle = 0.0;
 	game->player_dir = '0';
-	// Inicializar parsing
 	game->file = NULL;
 	game->body_map = NULL;
 	game->map = NULL;
@@ -33,7 +30,6 @@ void	init_game(t_game *game)
 	game->c_tex_ea = 0;
 	game->c_c_color = 0;
 	game->c_f_color = 0;
-	// Inicializar rutas
 	game->routes.no = NULL;
 	game->routes.so = NULL;
 	game->routes.we = NULL;
