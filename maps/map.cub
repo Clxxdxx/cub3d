@@ -1,10 +1,10 @@
 
 F 25,0,0
 
-SO ./imgs/vsur.png
-WE ./imgs/voeste.png
-EA ./imgs/veste.png
-NO ./imgs/vnorte.png
+SO ./imgs/ladrillo_blanco.png
+WE ./imgs/ladrillo_blanco.png
+EA ./imgs/ladrillo_blanco.png
+NO ./imgs/ladrillo_blanco.png
                                 
 C    0,21,0
 

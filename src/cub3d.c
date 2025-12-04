@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 10:58:11 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/28 10:58:42 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/12/04 15:34:20 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	t_game	game;
-	t_r_file r_file;
-	//t_minimap minimap;
-	
+	t_game		game;
+	t_r_file	r_file;
+
 	if (argc != 2)
 	{
 		ft_printf("Error\nExecute: ./cub3d maps/map.cub\n");
@@ -29,38 +28,12 @@ int	main(int argc, char **argv)
 	read_file(&game, argv[1], &r_file);
 	validate_closed_map(&game);
 	map_trimmed(&game);
-	// 🟦 Mostrar rutas de texturas
-	printf("\n--- TEXTURAS ---\n");
-	printf("NO: %s\n", game.routes.no);
-	printf("SO: %s\n", game.routes.so);
-	printf("WE: %s\n", game.routes.we);
-	printf("EA: %s\n", game.routes.ea);
 	game.textures.no = mlx_load_png(game.routes.no);
 	game.textures.so = mlx_load_png(game.routes.so);
 	game.textures.we = mlx_load_png(game.routes.we);
 	game.textures.ea = mlx_load_png(game.routes.ea);
-	if (!game.textures.no || !game.textures.so ||
-    !game.textures.we || !game.textures.ea)
-	{
-		ft_putstr_fd("Error\nFailed to load textures\n", 2);
-		cleanup_game(&game);
-		exit(1);
-	}
-	// 🟫 Mostrar colores de suelo y cielo
-	printf("\n--- COLORES ---\n");
-	printf("Ceiling (C): R:%d G:%d B:%d\n", game.ceiling.r, game.ceiling.g,
-		game.ceiling.b);
-	printf("Floor   (F): R:%d G:%d B:%d\n", game.floor.r, game.floor.g,
-		game.floor.b);
-			
-	// 🗺️ Mostrar mapa
-	printf("\n--- MAPA ---\n");
-	for (int i = 0; game.map[i]; i++)
-		printf("%s\n", game.map[i]);
-			
 	start_executor(&game);
-	create_minimap(&game);		
-	
+	create_minimap(&game);
 	mlx_loop(game.mlx);
 	cleanup_game(&game);
 	return (0);

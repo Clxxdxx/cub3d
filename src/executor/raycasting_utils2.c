@@ -6,13 +6,12 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 11:58:40 by clalopez          #+#    #+#             */
-/*   Updated: 2025/11/27 14:32:29 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/12/04 15:27:52 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../cub3d.h"
 
-//DEvuelve la textura que se tiene que pintar segun la cara de la pared y la direccion del rayo
 mlx_texture_t	*set_orientation_texture(t_ray *ray, t_game *game)
 {
 	if (ray->wall_face == 0)
@@ -30,7 +29,7 @@ mlx_texture_t	*set_orientation_texture(t_ray *ray, t_game *game)
 			return (game->textures.so);
 	}
 }
-//Lee los valores de rgba de un pixel y los devuelve
+
 uint32_t	draw_rgba_pixel(mlx_texture_t *tex, t_ray *ray, int tex_y)
 {
 	uint8_t	r;
@@ -47,8 +46,6 @@ uint32_t	draw_rgba_pixel(mlx_texture_t *tex, t_ray *ray, int tex_y)
 	return ((r << 24) | (g << 16) | (b << 8) | a);
 }
 
-//Calcula la posicion donde impactan los rayos en la pared y la columna de la textura.
-//Tambien recorre el paso para recorrer y pintar la columna
 void	calculate_tex_coords(t_ray *ray, t_game *game, mlx_texture_t *tex,
 		double *step)
 {
@@ -64,7 +61,7 @@ void	calculate_tex_coords(t_ray *ray, t_game *game, mlx_texture_t *tex,
 		ray->tex_x = tex->width - ray->tex_x - 1;
 	*step = (double)tex->height / ray->wall_height;
 }
-//Pone los pixeles del cielo segun el color
+
 void	put_pixels_ceiling(t_game *game, t_ray *ray, int *y, int x)
 {
 	uint32_t	ceiling_color;
@@ -77,7 +74,7 @@ void	put_pixels_ceiling(t_game *game, t_ray *ray, int *y, int x)
 		mlx_put_pixel(game->img, x, (*y)++, ceiling_color);
 	}
 }
-//Pone los pixeles del suelo segun el color
+
 void	put_pixels_floor(t_game *game, t_ray *ray, int *y, int x)
 {
 	uint32_t	floor_color;

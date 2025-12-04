@@ -1,8 +1,8 @@
 F 139,69,198
-SO ./imgs/vsur.png
-WE ./imgs/voeste.png
-EA ./imgs/veste.png
-NO ./imgs/vnorte.png
+SO ./imgs/ladrillo_blanco.png
+WE ./imgs/ladrillo_blanco.png
+EA ./imgs/ladrillo_blanco.png
+NO ./imgs/ladrillo_blanco.png
 
 C 135,206,235
 1111

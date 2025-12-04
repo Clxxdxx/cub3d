@@ -1,10 +1,10 @@
-SO                ./imgs/murosur
+SO                ./imgs/ladrillo_blanco.png
 
 
-NO ./imgs/muronorte
+NO ./imgs/ladrillo_blanco.png
 
-WE ./imgs/murooeste
-                                EA     ./imgs/muroeste
+WE ./imgs/ladrillo_blanco.png
+                                EA     ./imgs/ladrillo_blanco.png
 F 220,100,099
 
 C 225,30,119

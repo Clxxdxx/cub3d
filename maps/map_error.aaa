@@ -1,8 +1,8 @@
-SO                ./imgs/murosur
-NO ./imgs/muronorte
-WE ./imgs/murooeste
+SO                ./imgs/ladrillo_blanco.png
+NO ./imgs/ladrillo_blanco.png
+WE ./imgs/ladrillo_blanco.png
 
-                                EA     ./imgs/muroeste
+                                EA     ./imgs/ladrillo_blanco.png
 
 F 220,100,0
 C 225,30,0
