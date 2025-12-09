@@ -6,7 +6,7 @@
 /*   By: clalopez <clalopez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 11:58:40 by clalopez          #+#    #+#             */
-/*   Updated: 2025/12/04 15:27:52 by clalopez         ###   ########.fr       */
+/*   Updated: 2025/12/09 11:08:43 by clalopez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	put_pixels_floor(t_game *game, t_ray *ray, int *y, int x)
 
 	floor_color = (game->floor.r << 24) | (game->floor.g << 16)
 		| (game->floor.b << 8) | 255;
-	*y = 0;
-	while (*y < ray->draw_from)
+	*y = ray->draw_to + 1;
+	while (*y < WINDOW_HEIGHT)
 	{
 		mlx_put_pixel(game->img, x, (*y)++, floor_color);
 	}
